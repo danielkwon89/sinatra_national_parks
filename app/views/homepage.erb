@@ -1,2 +1,6 @@
 <h1>Welcome to your homepage, <%= @user.first_name %>!</h1>
-<h3><a href='/logout'>Log Out</a></h3>
+<h4><a href='/logout'>Log Out</a></h4>
+<h3> National Parks: </h3>
+<% Park.all.each do |park| %>
+    <h4><p><%= park.name %></p></h4>
+<% end %>

@@ -43,6 +43,14 @@ class ApplicationController < Sinatra::Base
 
     get '/homepage' do
         @user = User.find_by_id(session[:user_id])
+        @parks = Park.all
         erb :homepage
+    end
+
+    get '/park/:id' do
+        @park = Park.select do |park|
+            park.id == params[:id].to_i
+        end.first
+        erb :park
     end
 end

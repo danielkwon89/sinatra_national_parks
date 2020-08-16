@@ -10,17 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_185058) do
+ActiveRecord::Schema.define(version: 2020_08_16_004905) do
 
   create_table "parks", force: :cascade do |t|
     t.string "name"
-    t.string "state"
+    t.string "image_url"
+    t.string "location"
+    t.string "date_established"
+    t.string "visitors"
     t.string "description"
-    t.string "activities"
-    t.string "photo_urls"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

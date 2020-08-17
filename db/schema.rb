@@ -19,12 +19,17 @@ ActiveRecord::Schema.define(version: 2020_08_16_004905) do
     t.string "date_established"
     t.string "visitors"
     t.string "description"
+    t.integer "user_id"
+    t.integer "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.string "title"
     t.string "content"
+    t.integer "user_id"
+    t.integer "park_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

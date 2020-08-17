@@ -1,6 +1,13 @@
 <h1>Welcome to your homepage, <%= @user.first_name %>!</h1>
 <h4><a href='/logout'>Log Out</a></h4>
-<h3> National Parks: </h3>
+<h2> Choose A National Park: </h2>
 <% Park.all.each do |park| %>
-    <h4><p><%= park.name %></p></h4>
+    <h4><p><a href="/park/<%= park.id %>"><%= park.name %></a></p></h4>
+<% end %>
+
+<h2> Your Reviews: </h2>
+<% @user.reviews.each do |review| %>
+    <p><%= review.created_at.strftime("%m/%d/%Y") %></p>
+    <p><%= review.title %></p>
+    <p><%= review.content %></p>
 <% end %>

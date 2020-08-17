@@ -6,6 +6,7 @@ class CreateUsersTable < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :bio
       t.string :password_digest
+      # t.integer :review_id
       t.timestamps
     end
   end

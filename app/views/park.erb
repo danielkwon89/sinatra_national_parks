@@ -8,4 +8,11 @@
     <p><%= review.created_at.strftime("%m/%d/%Y") %> by <%= %></p>
     <p><%= review.title %></p>
     <p><%= review.content %></p>
+    <% if review.user == current_user %>
+        <p><a href="/reviews/<%= review.id %>/edit">Edit</a></p>
+        <form action="/reviews/<%= review.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete">
+        </form>
+    <% end %>
 <% end %>

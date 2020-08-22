@@ -9,6 +9,7 @@ class CreateParksTable < ActiveRecord::Migration[5.2]
       t.string :description
       t.integer :user_id
       t.integer :review_id
+      # t.float :rating
       t.timestamps
     end
   end

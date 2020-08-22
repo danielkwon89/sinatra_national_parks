@@ -1,7 +1,33 @@
-<h1>Edit Your Review</h1>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+</style>
+
+<center>
+<h2><%= @review.park.name %></h2>
+
 <form action="/reviews/<%= @review.id %>/edit" method='post'>
+    <h3><u>Edit a Rating</u>:</h3>
+    <input type="radio" id="0" name="rating" value="0">
+    <label for="0">0</label>
+    <input type="radio" id="1" name="rating" value="1">
+    <label for="1">1</label>
+    <input type="radio" id="2" name="rating" value="2">
+    <label for="2">2</label>
+    <input type="radio" id="3" name="rating" value="3">
+    <label for="3">3</label>
+    <input type="radio" id="4" name="rating" value="4">
+    <label for="4">4</label>
+    <input type="radio" id="5" name="rating" value="5">
+    <label for="5">5</label>
+
+    <br>
+
+    <h3><u>Edit a Review</u>:</h3>
     <input type="hidden" name="_method" value="patch">
-    <input type="text" name="title" value ="<%= @review.title %>">
-    <input type="text" name="content" value="<%= @review.content %>">
-    <input type="submit" name="submit" id="submit" value="Submit">
+    <textarea name="title" rows="1" cols="100"><%= @review.title %></textarea>
+    <br>
+    <textarea name="content" rows="15" cols="100"><%= @review.content %></textarea>
+    <br>
+    <input style="width: 65px; font-family: Alata;" type="submit" name="submit" id="submit" value="Submit">
 </form>
+</center>

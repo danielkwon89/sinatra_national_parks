@@ -1,0 +1,27 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/application.css">
+</div>
+
+</head>
+
+<body>
+
+<center>
+
+<form style="display: inline; padding: 0px 5px 0px 5px;" action="/homepage" method="get">
+<button style="width: 70px; font-family: Alata;">Home</button>
+</form>
+
+<form style="display: inline; padding: 0px 5px 0px 5px;" action="/user/profile/<%= current_user.id %>" method="get">
+<button style="width: 70px; font-family: Alata;">Profile</button>
+</form>
+
+<form style="display: inline; padding: 0px 5px 0px 5px;" action="/logout" method="get">
+<button style="width: 70px; font-family: Alata;">Log Out</button>
+</form>
+
+</center>
+
+    <%= yield %>
+
+</body>

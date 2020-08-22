@@ -1,0 +1,72 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+</style>
+
+
+
+<center>
+<h1 class="title" style="background-image: url('https://www.nationalgeographic.com/content/dam/travel/2017-digital/aurora-viewing-destinations/aurora-kirkjufell-iceland.jpg'); background-position: center; height: 60%; width: 100%; border: 1px solid black; color: white; 
+text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 0 black; background-repeat: no-repeat;background-attachment: fixed; background-position: center; background-size: cover;"><%= @user.first_name %> <%= @user.last_name %><%= "'s" %> Profile</h1>
+
+<p><h4><u>Email</u>:</h4>
+<%= @user.email %>
+</p>
+
+<p class="padding-bottom"><h4><u>Bio</u>:</h4>
+<p><%= @user.bio %></p>
+<% if @user == current_user %>
+    <a href="/user/bio">Add/Edit Bio</a>
+<% end %>
+</p>
+
+<p class="padding-bottom"><h4><u><p>Visited Parks</u>:</p></h4>
+<% @user.parks.sort.uniq.each do |park| %>
+    <p><a href="/park/<%= park.id %>"><%= park.name %>: <%= park.location %></a>
+<% end %>
+</p>
+
+</center>
+
+<br>
+
+<h4><u><p>
+<%= User.find_by_id(params[:id]).first_name %>
+'s Reviews
+</u>:</p></h4>
+<p></p>
+<% @user.reviews.each do |review| %>
+    <p class="review-title"><b><a href="/park/<%= review.park.id %>"><%= review.park.name %></a>&nbsp<%= review.rating.to_f %>
+
+    <% review.rating.to_f.round.times do %>
+        <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-icongraph/64/UI_Hand-drawn-38-512.png" width="20" height="20">
+    <% end %>
+
+    <% %>
+    </b>
+    <br>
+    <em>created: <%= review.created_at.strftime("%m/%d/%Y") %></em></p>
+    <b><u><p><%= review.title %></p></u></b>
+    <p><%= review.content %></p>
+
+    <% if @user == current_user %>
+
+    <form style="display: inline;" action="/reviews/<%= review.id %>/edit" method="get">
+    <button style="width: 65px; font-family: Alata;">Edit</button>
+    </form>
+
+    <form style="display: inline;" action="/reviews/<%= review.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input style="width: 65px; font-family: Alata;" type="submit" value="Delete">
+    </form>
+
+    <% session[:back_url] = request.url %>
+    
+    <% end %>
+<% end %>
+<br>
+<br>
+<center>
+<form style="display: inline; padding: 0px 5px 0px 5px;" action="/homepage" method="get">
+<button style="width: 70px; font-family: Alata;">Home</button>
+</form>
+</center>

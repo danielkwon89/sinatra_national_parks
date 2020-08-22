@@ -20,12 +20,29 @@ class UsersController < ApplicationController
 			session[:user_id] = @user.id
             redirect to "/homepage"
 		else
-            erb :failure
+            erb :failure, :layout => false
 		end
     end
 
     get '/logout' do
         session.clear
-        erb :'users/logout'
+        erb :'users/logout', :layout => false
+    end
+
+    get '/user/profile/:id' do
+        @user = User.find_by_id(params[:id])
+        erb :'users/profile'
+    end
+
+    get '/user/bio' do
+        @user = current_user
+        erb:'users/bio'
+    end
+
+    post '/user/bio' do
+        @user = current_user
+        @user.bio = params[:bio]
+        @user.save
+        redirect to "/user/profile"
     end
 end

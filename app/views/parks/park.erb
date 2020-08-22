@@ -1,0 +1,78 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+</style>
+
+<body>
+
+<h1 class="title" style="padding-left: 25px; background-image: url(<%= @park.image_url %>); height: 80%; width: 100%; border: 1px solid black; color: white; text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 0 black; background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;"><%= @park.name %></h1>
+
+<center>
+
+<p class="info-title"><b>Location: </b><%= @park.location %></p>
+
+<p class="info-title"><b>Date Established: </b><%= @park.date_established %></p>
+
+<p class="info-title"><b>Visitors (2019): </b><%= @park.visitors %></p>
+
+
+
+<p class="info-title"><b>Rating:</b>
+<% ratings = @park.reviews.collect{|review| review.rating.to_f} %>
+<% average = ratings.inject{|sum, el| sum + el}.to_f/ratings.size %>
+<% if !average.nan? %>
+    <%= average.round(2) %>
+    <% average.round.times do %>
+        <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-icongraph/64/UI_Hand-drawn-38-512.png" width="20" height="20">
+    <% end %>
+<% end %>
+</p>
+
+<p class="info-title"><b>Description:</b>
+<br>
+<br>
+<%= @park.description %></p>
+
+</center>
+<br>
+<br>
+<a href="/park/<%= @park.id %>/reviews/new">Create a Review</a>
+<br>
+<% @park.reviews.each do |review| %>
+    <b><u><p class="review-title"><%= review.title %></u>&nbsp
+    <%= review.rating.to_f %>
+    <% review.rating.to_f.round.times do %>
+        <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-icongraph/64/UI_Hand-drawn-38-512.png" width="20" height="20">
+    <% end %>
+    </p></b>
+    <p><em>created by: <a href="/user/profile/<%= review.user.id %>"><%= review.user.first_name %> <%= review.user.last_name %></a></em> on <%= review.created_at.strftime("%m/%d/%Y") %></p>
+    <p><%= review.content %></p>
+    <% if review.user == current_user %>
+
+        <form style="display: inline;" action="/reviews/<%= review.id %>/edit" method="get">
+        <button style="width: 65px; font-family: Alata;">Edit</button>
+        </form>
+
+        <form style="display: inline;" action="/reviews/<%= review.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input style="width: 65px; font-family: Alata;" type="submit" value="Delete">
+        </form>
+
+    <% end %>
+
+    <% if review.user != current_user %>
+
+    <form style="display: inline;" action="/reviews/<%= review.id %>/upvote" method="get">
+        <button style="width: 100px; font-family: Alata;">Upvote</button>
+    </form>
+
+    <form style="display: inline;" action="/reviews/<%= review.id %>/downvote" method="get">
+        <button style="width: 100px; font-family: Alata;">Downvote</button>
+    </form>
+
+<% end %>
+
+
+    <% session[:back_url] = request.url %>
+
+<% end %>
+</body>

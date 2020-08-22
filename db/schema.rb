@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 2020_08_16_004905) do
     t.string "content"
     t.integer "user_id"
     t.integer "park_id"
+    t.integer "upvotes"
+    t.integer "downvotes"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

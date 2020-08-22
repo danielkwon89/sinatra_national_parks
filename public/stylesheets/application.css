@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300&display=swap');
+
+body {
+  font-family: "Georgia", serif;
+  font-size: 1.25rem;
+  background-color: #EBEEF2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Alata', sans-serif;
+  width: 100%;
+  background-color: #EBEEF2;
+}
+
+.title {
+  padding: 15px 0px 20px 0px;
+}
+
+.review-title {
+  padding-top: 20px;
+}
+
+.info-title {
+  padding-top: 15px;
+}
+
+.bottom-padding-20px {
+  padding-bottom: 20px;
+}
+
+.padding-bottom {
+  padding-bottom: 0.1px;
+}
+
+.navigation {
+  font-family: "Georgia", serif;
+  font-size: 1.25rem;
+  background-color: #EBEEF2;
+}
+
+.profile-box {
+  border: 1px;
+}

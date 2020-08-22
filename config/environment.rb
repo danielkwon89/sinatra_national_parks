@@ -9,5 +9,4 @@ ActiveRecord::Base.establish_connection(
 )
 
 require_relative '../secrets.rb'
-
 require_all 'app'

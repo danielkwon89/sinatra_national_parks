@@ -1,0 +1,21 @@
+<center>
+<h1 class="title" style="background-image: url('https://www.nationalgeographic.com/content/dam/travel/rights-exempt/Travel-2016/59-parks-52-weeks/sequoia/giant-tree-trail-sequoia-national-park.jpg'); background-position: center; height: 50%; width: 100%; border: 1px solid black; color: white; text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 0 black; background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">National Parks by Name</h1>
+
+<h4 class="bottom-padding-20px"><a href="/parks/by_state">Sort by State</a></h4>
+
+<% @parks.each do |park| %>
+    <p>
+    <center>
+    <a href="/park/<%= park.id %>"><%= park.name %></a>
+    </center>
+    <% ratings = park.reviews.collect{|review| review.rating.to_f} %>
+    <% average = ratings.inject{|sum, el| sum + el}.to_f/ratings.size %>
+    <% if !average.nan? %>
+        <%= average.round(2) %>
+        <% average.round.times do %>
+            <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-icongraph/64/UI_Hand-drawn-38-512.png" width="20" height="20">
+        <% end %>
+    <% end %>
+    </p>
+<% end %>
+</center>

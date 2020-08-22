@@ -1,12 +1,15 @@
-<html>
-<body>
+<style>@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');</style>
 
-<h1>Welcome to the National Parks App!</h1>
+<body style="background-color: #EBEEF2;">
+
+<center><h1 style="background-image: url('https://www.nationalgeographic.com/content/dam/magazine/rights-exempt/2016/05/yellowstone/prismatic-spring.ngsversion.1482289966178.adapt.1900.1.jpg'); background-position: center; height: 52.5%; width: 100%; border: 1px solid black; color: white; text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 0 black; background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover; font-family: 'Alata', sans-serif; padding: 15px 0px 20px 0px; font-size: 2.8rem;">Welcome to National Park Reviews!</h1></center>
 
 <br>
 
-<h3>New User?</h3>
-<h3>Sign Up</h3>
+<div>
+<center>
+<h2>New User?</h2>
+<h2>Sign Up</h2>
 <form method="POST" action="/signup">
 <input type="text" id="first_name" name="first_name" placeholder="First Name">
 <br>
@@ -16,18 +19,23 @@
 <br>
 <input type="password" id="password" name="password" placeholder="Password">
 <br>
-<input type="submit" id="submit" name="submit" value="Sign Up">
+<input style="width: 65px; font-family: Alata;" type="submit" id="submit" name="submit" value="Sign Up">
 </form>
+</center>
+</div>
 
-<h3>Already Have An Account?</h3>
-<h3>Log In</h3>
+<div>
+<center>
+<h2>Already Have An Account?</h2>
+<h2>Log In</h2>
 <form method="POST" action="/login">
 <input type="email" id="email" name="email" placeholder="Email">
 <br>
 <input type="password" id="password" name="password" placeholder="Password">
 <br>
-<input type="submit" id="submit" name="submit" value="Log In">
+<input style="width: 65px; font-family: Alata;" type="submit" id="submit" name="submit" value="Log In">
 </form>
+</center>
+</div>
 
 </body>
-</html>

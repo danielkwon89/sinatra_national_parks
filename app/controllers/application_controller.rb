@@ -1,14 +1,16 @@
 class ApplicationController < Sinatra::Base
-    register Sinatra::ActiveRecordExtension
-    set :views, Proc.new { File.join(root, "../views/") }
 
     configure do
         enable :sessions
         set :session_secret, ENV['SESSION_SECRET']
+
+        register Sinatra::ActiveRecordExtension
+        set :views, Proc.new{File.join(root, "../views/")}
+        set :public_folder, 'public'
     end
 
     get '/' do
-        erb :index
+        erb :index, :layout => false
     end
 
     get '/homepage' do

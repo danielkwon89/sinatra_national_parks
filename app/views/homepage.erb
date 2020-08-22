@@ -1,13 +1,6 @@
-<h1>Welcome to your homepage, <%= @user.first_name %>!</h1>
-<h4><a href='/logout'>Log Out</a></h4>
-<h2> Choose A National Park: </h2>
-<% Park.all.each do |park| %>
-    <h4><p><a href="/park/<%= park.id %>"><%= park.name %></a></p></h4>
-<% end %>
+<center><h1 class="title" style="background-image: url('https://www.nationalgeographic.com/content/dam/travel/rights-exempt/Travel-2016/59-parks-52-weeks/north-cascades/north-cascades-national-park-picture-lake-mount-shuksan.jpg'); background-position: center; height: 50%; width: 100%; border: 1px solid black; color: white; 
+text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 0 black; background-repeat: no-repeat;background-attachment: fixed; background-position: center; background-size: cover;">Welcome to your homepage, <%= @user.first_name %>!</h1></center>
+<center><u><h3>National Parks</u></h3>
+<h4><a href="/parks/by_name">Sort by Name</a></h4>
+<h4><a href="/parks/by_state">Sort by State</a></h4></center>
 
-<h2> Your Reviews: </h2>
-<% @user.reviews.each do |review| %>
-    <p><%= review.created_at.strftime("%m/%d/%Y") %></p>
-    <p><%= review.title %></p>
-    <p><%= review.content %></p>
-<% end %>

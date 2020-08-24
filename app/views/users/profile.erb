@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 </style>
 
-
-
 <center>
 <h1 class="title" style="background-image: url('https://www.nationalgeographic.com/content/dam/travel/2017-digital/aurora-viewing-destinations/aurora-kirkjufell-iceland.jpg'); background-position: center; height: 60%; width: 100%; border: 1px solid black; color: white; 
 text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 0 black; background-repeat: no-repeat;background-attachment: fixed; background-position: center; background-size: cover;"><%= @user.first_name %> <%= @user.last_name %><%= "'s" %> Profile</h1>
@@ -19,10 +17,26 @@ text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 
 <% end %>
 </p>
 
-<p class="padding-bottom"><h4><u><p>Visited Parks</u>:</p></h4>
+<p class="padding-bottom"><h4><u>Visited Parks</u>:</p></h4>
 <% @user.parks.sort.uniq.each do |park| %>
-    <p><a href="/park/<%= park.id %>"><%= park.name %>: <%= park.location %></a>
+    <p>
+    <% if current_user.parks.include?(park) %>
+    <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/pine-tree-16-486660.png" width="20" height="20">
+    <% end %>
+    <a href="/park/<%= park.id %>">
+    <%= park.name %>: <%= park.location %></a>
+    <% if current_user.parks.include?(park) %>
+    <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/pine-tree-16-486660.png" width="20" height="20">
+    <% end %>
 <% end %>
+</p>
+
+<p class="padding-bottom"><h4><u>Charisma Points</u>:</p></h4>
+<p>
+<% charisma_score = @user.reviews.map{|review| (review.upvotes * 2) - review.downvotes}.sum %>
+<img src="https://image.flaticon.com/icons/svg/616/616652.svg" width="20" height="20">&nbsp
+<%= charisma_score %>
+&nbsp<img src="https://image.flaticon.com/icons/svg/616/616652.svg" width="20" height="20">
 </p>
 
 </center>
@@ -31,8 +45,7 @@ text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 
 
 <h4><u><p>
 <%= User.find_by_id(params[:id]).first_name %>
-'s Reviews
-</u>:</p></h4>
+'s Reviews</u>:</p></h4>
 <p></p>
 <% @user.reviews.each do |review| %>
     <p class="review-title"><b><a href="/park/<%= review.park.id %>"><%= review.park.name %></a>&nbsp<%= review.rating.to_f %>
@@ -45,7 +58,13 @@ text-shadow: -1px 1px 1px black, 1px 1px 1px black, 1px -1px 0 black, -1px -1px 
     </b>
     <br>
     <em>created: <%= review.created_at.strftime("%m/%d/%Y") %></em></p>
-    <b><u><p><%= review.title %></p></u></b>
+    <b><u><p><%= review.title %></u></b>&nbsp&nbsp
+
+    <img src="https://image.flaticon.com/icons/svg/1027/1027567.svg" width="26" height="26">&nbsp<%= review.upvotes %>&nbsp
+    <img src="https://image.flaticon.com/icons/svg/900/900460.svg" width="22" height="22">&nbsp<%= review.downvotes %>
+    
+    </p>
+
     <p><%= review.content %></p>
 
     <% if @user == current_user %>

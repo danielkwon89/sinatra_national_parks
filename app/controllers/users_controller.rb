@@ -43,6 +43,6 @@ class UsersController < ApplicationController
         @user = current_user
         @user.bio = params[:bio]
         @user.save
-        redirect to "/user/profile"
+        redirect to "/user/profile/#{current_user.id}"
     end
 end

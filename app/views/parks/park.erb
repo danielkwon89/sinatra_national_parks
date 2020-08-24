@@ -37,40 +37,35 @@
 <br>
 <a href="/park/<%= @park.id %>/reviews/new">Create a Review</a>
 <br>
-<% @park.reviews.each do |review| %>
+
+<% reviews_sorted_by_votes = @park.reviews.order("(upvotes * 2) - downvotes").reverse %>
+
+<% reviews_sorted_by_votes.each do |review| %>
+
     <b><u><p class="review-title"><%= review.title %></u>&nbsp
     <%= review.rating.to_f %>
     <% review.rating.to_f.round.times do %>
-        <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-icongraph/64/UI_Hand-drawn-38-512.png" width="20" height="20">
+        <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-icongraph/64/UI_Hand-drawn-38-512.png"width="20"     height="20">
     <% end %>
     </p></b>
-    <p><em>created by: <a href="/user/profile/<%= review.user.id %>"><%= review.user.first_name %> <%= review.user.last_name %></a></em> on <%= review.created_at.strftime("%m/%d/%Y") %></p>
+    <p><em>created by: <a href="/user/profile/<%= review.user.id %>"><%= review.user.first_name %> <%= review.user. last_name %></a></em> on <%= review.created_at.strftime("%m/%d/%Y") %></p>
     <p><%= review.content %></p>
-    <% if review.user == current_user %>
-
-        <form style="display: inline;" action="/reviews/<%= review.id %>/edit" method="get">
-        <button style="width: 65px; font-family: Alata;">Edit</button>
-        </form>
-
-        <form style="display: inline;" action="/reviews/<%= review.id %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input style="width: 65px; font-family: Alata;" type="submit" value="Delete">
-        </form>
-
-    <% end %>
-
-    <% if review.user != current_user %>
-
-    <form style="display: inline;" action="/reviews/<%= review.id %>/upvote" method="get">
-        <button style="width: 100px; font-family: Alata;">Upvote</button>
+    <form style="display: inline-block;" action="/reviews/<%= review.id %>/upvote" method="get">
+        <button style="font-family: Alata; min-width: 105px">Upvotes&nbsp<%= review.upvotes %></button>
     </form>
-
-    <form style="display: inline;" action="/reviews/<%= review.id %>/downvote" method="get">
-        <button style="width: 100px; font-family: Alata;">Downvote</button>
+    <form style="display: inline-block;" action="/reviews/<%= review.id %>/downvote" method="get">
+        <button style="font-family: Alata; min-width: 110px;">Downvotes&nbsp<%= review.downvotes %></button>
+    </form>
+    <% if review.user == current_user %>
+    <form style="display: inline;" action="/reviews/<%= review.id %>/edit" method="get">
+    <button style="width: 80px; font-family: Alata;">Edit</button>
+    </form>
+    <form style="display: inline;" action="/reviews/<%= review.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input style="width: 80px; font-family: Alata;" type="submit" value="Delete">
     </form>
 
 <% end %>
-
 
     <% session[:back_url] = request.url %>
 

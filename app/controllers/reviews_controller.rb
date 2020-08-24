@@ -44,15 +44,16 @@ class ReviewsController < ApplicationController
     end
 
     get '/reviews/:id/upvote' do
-        binding.pry
         @review = Review.find_by_id(params[:id])
         @review.upvotes += 1
+        @review.save
         redirect to "#{session[:back_url]}"
     end
 
     get '/reviews/:id/downvote' do
         @review = Review.find_by_id(params[:id])
         @review.downvotes += 1
+        @review.save
         redirect to "#{session[:back_url]}"
     end
 end

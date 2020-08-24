@@ -6,7 +6,13 @@
 <% @parks.each do |park| %>
     <p>
     <center>
+    <% if current_user.parks.include?(park) %>
+        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/pine-tree-16-486660.png" width="20" height="20">
+    <% end %>
     <a href="/park/<%= park.id %>"><%= park.name %></a>
+    <% if current_user.parks.include?(park) %>
+        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/pine-tree-16-486660.png" width="20" height="20">
+    <% end %>
     </center>
     <% ratings = park.reviews.collect{|review| review.rating.to_f} %>
     <% average = ratings.inject{|sum, el| sum + el}.to_f/ratings.size %>

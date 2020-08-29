@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-    # has_and_belongs_to_many :parks
-    # has_many :reviews, through: :parks
-
     has_many :reviews
     has_many :parks, through: :reviews
 

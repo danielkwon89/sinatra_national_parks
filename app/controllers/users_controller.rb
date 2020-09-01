@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
 
     post '/signup' do
-        if !User.find_by(email: params["email"])
-            @user = User.create(first_name: params["first_name"], last_name: params["last_name"], email: params["email"], password: params["password"])
+        @user = User.create(first_name: params["first_name"], last_name: params["last_name"], email: params["email"], password: params["password"])
+        
+        if @user.valid?
             session[:user_id] = @user.id
             redirect to '/homepage'
         else
-            erb :failure
+            redirect to '/'
         end
     end
 
